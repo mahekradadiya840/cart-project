@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.center {
+  justify-content: center;
+}
+
+.padding {
+  padding-left: 135px;
+}
+
+.size {
+  font-size: 35px !important;
+}
+
+.i-con {
+  padding-bottom: 2px !important;
+  padding-left: 2px !important;
+}
+
+.btn-light-green {
+  background-color: #23BB75 !important;
+}
+
+.bg-color {
+  background-color: rgb(163, 190, 205) !important;
+  border: 1px solid rgb(163, 190, 205) !important;
+}
+
+.bg-color:hover {
+  background-color: rgb(102, 130, 145) !important;
+  color: white !important;
+}
+
+.w-80 {
+  width: 250px;
+  padding-left: 70px;
+}
+
+.side-menu {
+  background-color: rgb(163, 190, 205);
+  border: 3px solid white;
+}
+
+.card-item {
+  text-transform: capitalize !important;
+  padding: 5px !important;
+}
+
+.main-sidebar {
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+
+.side-menu:hover {
+  background-color: rgb(102, 130, 145) !important;
+  color: white !important;
+}
+
+.main-sidebar::-webkit-scrollbar {
+  width: 0px;
+  background-color: #f5f5f5;
+}
+
+
+.icons {
+  font-size: 18px;
+  padding-left: 2px;
+}
