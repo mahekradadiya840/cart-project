@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaStar } from "react-icons/fa";
 import { SlBasketLoaded } from "react-icons/sl";
@@ -10,25 +11,32 @@ const List = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // FIX: store ma reducer nu naam "cart" che, "category" nahi
     const category = useSelector((state) => state.cart.selectedCategory);
 
     function saveTocart(product) {
         dispatch(addTocart(product));
     }
 
-    // FIX: ek j useEffect - category badlay tyare data fetch thay
     useEffect(() => {
         setLoading(true);
+
         const url = category
             ? `https://dummyjson.com/products/category/${category}`
-            : 'https://dummyjson.com/products?limit=194';
+            : 'https://dummyjson.com/products';
 
-        axios.get(url)
-            .then((response) => setData(response.data.products))
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false));
+        axios
+            .get(url)
+            .then(function (response) {
+                setData(response.data.products);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                setLoading(false);
+            });
     }, [category]);
 
     function btn(rating) {
@@ -45,14 +53,25 @@ const List = () => {
 
     return (
         <div className="container">
-            <h1>Products</h1>
-            {loading && <p>Loading...</p>}
+
+            <h1 className="text-capitalize">
+                {category ? category.replace(/-/g, " ") : "All Products"}
+            </h1>
+
+            {loading && <p>...</p>}
             <div className="row">
                 {data.map((item) => (
                     <div key={item.id} className='col-lg-4 col-md-6 col-12 p-2'>
                         <div className='card p-1 h-100'>
                             <div>
-                                <img src={item.thumbnail} className='img-fluid w-80' alt={item.title} />
+
+                                <img
+                                    src={item.thumbnail}
+                                    className='img-fluid w-80'
+                                    alt={item.title}
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => navigate(`/product/${item.id}`)}
+                                />
                             </div>
                             <div className='card-body d-flex flex-column justify-content-between'>
                                 <div className='row'>
